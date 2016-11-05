@@ -109,7 +109,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\approot\package.json" (
 echo Running 'ng build' command in %DEPLOYMENT_TARGET%\approot
 pushd "%DEPLOYMENT_TARGET%\approot"
 call :ExecuteCmd node %DEPLOYMENT_TARGET%\approot\node_modules\angular-cli\bin\ng build --target=production
-xcopy %DEPLOYMENT_TARGET%\approot\dist\* %DEPLOYMENT_TARGET%\wwwroot /e /i /h
+xcopy %DEPLOYMENT_TARGET%\approot\dist\* %DEPLOYMENT_TARGET% /e /i /h
 popd
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

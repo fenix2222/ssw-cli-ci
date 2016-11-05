@@ -98,16 +98,16 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 call :SelectNodeVersion
 
 :: 3. Install npm packages
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
+IF EXIST "%DEPLOYMENT_TARGET%\approot\package.json" (
+  pushd "%DEPLOYMENT_TARGET%\approot"
   call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
 :: 4. NG Build
-echo Running 'ng build' command in %DEPLOYMENT_TARGET%
-call :ExecuteCmd node %DEPLOYMENT_TARGET%\node_modules\angular-cli\bin\ng build --target=production
+echo Running 'ng build' command in %DEPLOYMENT_TARGET%\approot
+call :ExecuteCmd node %DEPLOYMENT_TARGET%\approot\node_modules\angular-cli\bin\ng build --target=production
 xcopy %DEPLOYMENT_TARGET%\approot\dist\* %DEPLOYMENT_TARGET%\wwwroot /e /i /h
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

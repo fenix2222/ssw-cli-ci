@@ -107,6 +107,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 
 :: 4. NG Build
 echo Running 'ng build' command in %DEPLOYMENT_TARGET%
+call :ExecuteCmd !NPM_CMD! install -g angular-cli
 call :ExecuteCmd node %DEPLOYMENT_TARGET%\node_modules\angular-cli\bin\ng build --target=production
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -100,10 +100,14 @@ call :SelectNodeVersion
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install --production
+  call :ExecuteCmd !NPM_CMD! install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
+
+:: 4. NG Build
+echo Running 'ng build' command in %DEPLOYMENT_TARGET%...
+call :ExecuteCmd node %DEPLOYMENT_TARGET%\node_modules\angular-cli\bin\ng build --target=production
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
